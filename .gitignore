@@ -1,0 +1,18 @@
+# Virtual environments & caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local data & config (never commit)
+*.db
+*.db-wal
+*.db-shm
+.env
+ecc_config.toml
+wandb/
+
+# Credentials (never commit)
+**/kaggle.json
+**/access_token*
+dist/

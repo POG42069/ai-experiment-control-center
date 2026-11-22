@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecc"
+version = "0.1.0"
+description = "AI Experiment Control Center — read-only backend for ML training dashboards"
+requires-python = ">=3.10"
+dependencies = [
+    "streamlit",
+    "plotly",
+    "pandas",
+    "wandb",
+    "keyring",
+    "kaggle",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+include = ["ecc*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

@@ -1,0 +1,66 @@
+# AI Experiment Control Center (ECC) configuration example.
+# Copy this file to `ecc_config.toml` (gitignored) or point `ECC_CONFIG` to your file.
+#
+# SECURITY: NEVER put API keys, tokens, passwords, or secrets in this file!
+# ECC rejects any config key containing "key", "token", "password", or "secret".
+# Store secrets in Windows Credential Manager via `keyring` (service "ai-ecc")
+# or environment variables (e.g. WANDB_API_KEY, KAGGLE_API_TOKEN).
+
+[general]
+# Dashboard auto-refresh interval in seconds (allowed: 10..300).
+refresh_seconds = 15
+
+# Mark a "running" run as STALE if no heartbeat has been seen for this many seconds.
+stale_after_s = 180
+
+# Mark a "running" run as OFFLINE if no heartbeat has been seen for this many seconds.
+offline_after_s = 900
+
+# Demo data mode:
+#   "auto" -> enable synthetic demo source only when W&B entity/projects are not configured
+#   "on"   -> always include synthetic demo source
+#   "off"  -> never include synthetic demo source
+demo_mode = "auto"
+
+# Optional override for local SQLite metadata database path.
+# Leave empty to use %LOCALAPPDATA%\ai-ecc\ecc.db on Windows (fallback: ~/.ai-ecc/ecc.db).
+db_path = ""
+
+[wandb]
+# Your W&B entity (username or team name). Leave empty to run in demo mode.
+entity = ""
+
+# List of W&B project names to monitor (read-only).
+projects = []
+
+[launch]
+# Launch control is disabled by default; set true to allow human-confirmed Kaggle launches from the UI.
+enabled = false
+
+# Fixed per-account Kaggle runner kernel slug (<owner>/<runner_slug>; >= 5 chars).
+runner_slug = "ecc-runner"
+
+# Default and allowed Kaggle accelerators ("none" runs on CPU without GPU quota).
+default_accelerator = "NvidiaTeslaT4"
+allowed_accelerators = ["NvidiaTeslaT4", "TpuV5E8", "none"]
+
+# Maximum allowed Kaggle session timeout in hours.
+max_timeout_hours = 12
+
+# Kaggle Secrets labels (NOT secret values!) attached to the runner notebook in the Kaggle UI.
+wandb_credential_label = "WANDB_API_KEY"
+github_credential_label = "GITHUB_TOKEN"
+
+# Optional default W&B project name for launched runs.
+default_wandb_project = ""
+
+# Optional list of account nicknames (NO secrets; only non-sensitive identifiers).
+# [[accounts]]
+# nickname = "kaggle-1"
+# platform = "kaggle"       # one of: "kaggle", "colab", "wandb"
+# username = "my-kaggle-user"
+#
+# [[accounts]]
+# nickname = "colab-1"
+# platform = "colab"
+# username = "my-colab-alias"
