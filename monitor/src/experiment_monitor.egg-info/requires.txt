@@ -1,4 +1,0 @@
-wandb>=0.17
-
-[hf]
-transformers>=4.40

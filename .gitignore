@@ -16,3 +16,7 @@ wandb/
 **/kaggle.json
 **/access_token*
 dist/
+
+# Build artifacts
+build/
+*.egg-info/
